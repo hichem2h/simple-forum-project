@@ -2,6 +2,8 @@ def receive(request, money):
     cash = [100, 50, 20, 10, 5, 2, 1]
     if money < request:
         refuse(money)
+    elif request < 0 :
+        print 'Request should be more than zero'
     else :
         remainder = money - request
         for e in cash:
@@ -20,4 +22,4 @@ def finish(remainder):
     print 'Request Finished: '  + str(remainder) + ' available'
 
 if __name__ == '__main__':
-    receive(188, 200)
+    receive(-188, 200)
