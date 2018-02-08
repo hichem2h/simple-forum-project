@@ -18,3 +18,6 @@ def refuse(money):
 
 def finish(remainder):
     print 'Request Finished: '  + str(remainder) + ' available'
+
+if __name__ == '__main__':
+    receive(188, 200)
