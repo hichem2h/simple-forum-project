@@ -1,59 +1,41 @@
-class ATM ():
+class ATM :
 
     def __init__(self, balance, name):
         self.name = name
         self.balance = balance
 
     def withdraw (self, request):
+        sep = '-' * 23
 
-        print '-----------------------'
-        print 'Welcome to ' + self.name
-        print 'Current balance = ' + str(self.balance)
-        print '-----------------------'
+        print sep
+        print 'Welcome to {}'.format(self.name)
+        print 'Current balance = {}'.format(self.balance)
+        print sep
 
         if   request > self.balance:
             print("Can't give you all this money !!")
-            remainder = self.balance
 
         elif request < 0:
             print("More than zero plz!")
-            remainder = self.balance
 
         else:
-            remainder = self.balance - request
+            self.balance -= request
+            cash = [100, 50, 20, 10, 5, 2, 1]
+            for e in cash:
+                while request >= e:
+                    print 'give {}'.format(e)
+                    request -= e
 
-            while request > 0:
 
-                if request >= 100:
-                    request -= 100
-                    print("give 100")
+if __name__ == '__main__':
+    balance1 = 500
+    balance2 = 1000
 
-                elif request >= 50:
-                    request -= 50
-                    print("give 50")
+    atm1 = ATM(balance1, "Smart Bank")
+    atm2 = ATM(balance2, "Baraka Bank")
 
-                elif request >= 10:
-                    request -= 10
-                    print("give 10")
+    atm1.withdraw(277)
+    atm1.withdraw(800)
 
-                elif request >= 5:
-                    request -= 5
-                    print("give 5")
-
-                elif request < 5:
-                    print("give " + str(request))
-                    request = 0
-
-        self.balance = remainder
-
-balance1 = 500
-balance2 = 1000
-
-atm1 = ATM(balance1, "Smart Bank")
-atm2 = ATM(balance2, "Baraka Bank")
-
-atm1.withdraw(277)
-atm1.withdraw(800)
-
-atm2.withdraw(100)
-atm2.withdraw(2000)
+    atm2.withdraw(100)
+    atm2.withdraw(2000)
