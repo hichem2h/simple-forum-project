@@ -6,13 +6,7 @@ class ATM :
         self.balance = balance
 
     def withdraw(self, request):
-        sep = '=' * 23
-
-        print
-        print sep
-        print 'Welcome to {}'.format(self.name)
-        print 'Current balance = {}'.format(self.balance)
-        print sep
+        self.print_sep('Current balance = {}'.format(self.balance), self.name)
 
         if   request > self.balance:
             print("Can't give you all this money !!")
@@ -30,18 +24,20 @@ class ATM :
                     request -= e
 
     def show_withdraws(self):
-        sep = '=' * 23
-
-        print
-        print sep
-        print 'Welcome to {}'.format(self.name)
-        print 'Withdraws Receipt'
-        print sep
+        self.print_sep('Withdraws Receipt', self.name)
 
         for withdrawal in self.withdrawals_list:
             print 'withdrawal: {}'.format(withdrawal)
 
+    @staticmethod
+    def print_sep(title, name):
+        sep = '=' * 23
 
+        print
+        print sep
+        print 'Welcome to {}'.format(name)
+        print title
+        print sep
 
 
 if __name__ == '__main__':
