@@ -8,13 +8,8 @@ member2 = models.Member('Ahmed', 43, 1)
 
 ms.add(member1)
 ms.add(member2)
-ms.add(member1)
 
 print ms.get_all()
-print ms.get_by_id(0)
-print ms.entity_exists(member2)
-ms.delete(1)
-print ms.entity_exists(member2)
 
 post1 = models.Post('Title 01', 'Some Content in the 1st post of the 1MAC forum', 0)
 post2 = models.Post('Title 02', 'Some Content in the 2nd post of the 1MAC forum', 1)
