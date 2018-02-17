@@ -11,15 +11,20 @@ class MemberStore:
         return self.members
 
     def get_by_id(self, id):
+        result = None
         all_members = self.get_all()
         for e in all_members:
             if e.id == id :
-                return e
+                result = e
+                break
+        return result
 
     def entity_exists(self, member):
-        if self.get_by_id(member.id):
-            return True
-        return False
+        result = False
+        if self.get_by_id(member.id) is not None:
+            result = True
+            break
+        return result
 
     def delete(self, id):
         member = self.get_by_id(id)
