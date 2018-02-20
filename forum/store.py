@@ -1,3 +1,5 @@
+import itertools, copy
+
 class MemberStore:
     members = []
     last_id = 1
@@ -37,6 +39,25 @@ class MemberStore:
                 all_members[i] = member
                 break
             i += 1
+
+    def get_by_name(self, name):
+        all_members = self.get_all()
+        for member in all_members:
+            if member.name == name:
+                yield member
+
+    def get_members_with_posts(self, all_posts):
+        all_members = copy.deepcopy(self.get_all())
+
+        for member, post in itertools.product(all_members, all_posts):
+            if member.id == post.member_id:
+                member.posts.append(post)
+        for member in all_members:
+            yield member
+
+    def get_top_two(self, post_store):
+         return sorted(self.get_members_with_posts(post_store), key=lambda x: len(x.posts), reverse=True) [:2]
+
 
 class PostStore:
     posts = []
