@@ -1,28 +1,34 @@
 import models, store
 
+
 ms = store.MemberStore()
 ps = store.PostStore()
 
-member1 = models.Member('Hichem', 21)
-member2 = models.Member('Ahmed', 43)
+def create_member_instances():
+    member1 = models.Member('Hichem', 21)
+    member2 = models.Member('Ahmed', 43)
+    print 'Members created'
+    return member1, member2
 
-ms.add(member1)
-ms.add(member2)
+def create_post_instances():
+    post1 = models.Post('Title 01', 'Some Content in the 1st post of the 1MAC forum')
+    post2 = models.Post('Title 02', 'Some Content in the 2nd post of the 1MAC forum')
+    post3 = models.Post('Title 03', 'Some Content in the 3rd post of the 1MAC forum')
+    print 'Posts created'
+    return post1, post2, post3
 
-print ms.get_all()[0]
-print ms.get_all()[1]
-print ms.get_by_id(2)
-print ms.entity_exists(member2)
-ms.delete(2)
-ms.delete(2)
-print ms.entity_exists(member2)
+def add_instances_to_stores(instances, store):
+    for instance in instances:
+        store.add(instance)
+    print 'Instances added to stores'
 
-# post1 = models.Post('Title 01', 'Some Content in the 1st post of the 1MAC forum')
-# post2 = models.Post('Title 02', 'Some Content in the 2nd post of the 1MAC forum')
-# post3 = models.Post('Title 03', 'Some Content in the 3rd post of the 1MAC forum')
-#
-# ps.add(post1)
-# ps.add(post2)
-# ps.add(post3)
-#
-# print ps.get_all()
+def print_all_members(member_store):
+    print("=" * 30)
+    for member in member_store.get_all():
+        print(member)
+    print("=" * 30)
+
+member_instances = create_member_instances()
+member1, member2 = member_instances
+add_instances_to_stores(member_instances, ms)
+print_all_members(ms)

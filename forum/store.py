@@ -23,19 +23,57 @@ class MemberStore:
         result = False
         if self.get_by_id(member.id) is not None:
             result = True
-            break
         return result
 
     def delete(self, id):
         member = self.get_by_id(id)
         MemberStore.members.remove(member)
 
+    def update(self, member):
+        all_members = self.get_all()
+        i = 0
+        for m in all_members:
+            if member.id == m.id:
+                all_members[i] = member
+                break
+            i += 1
 
 class PostStore:
     posts = []
+    last_id = 1
 
     def add(self, post):
-        self.posts.append(post)
+        post.id = PostStore.last_id
+        PostStore.posts.append(post)
+        PostStore.last_id += 1
 
     def get_all(self):
         return self.posts
+
+    def get_by_id(self, id):
+        result = None
+        all_posts = self.get_all()
+        for e in all_posts:
+            if e.id == id :
+                result = e
+                break
+        return result
+
+    def entity_exists(self, post):
+        result = False
+        if self.get_by_id(post.id) is not None:
+            result = True
+        return result
+
+    def delete(self, id):
+        post = self.get_by_id(id)
+        PostStore.posts.remove(post)
+
+    def update(self, post):
+        all_posts = self.get_all()
+        i = 0
+        for p in all_posts:
+            if post.id == p.id:
+                all_posts[i] = post
+                break
+            i += 1
