@@ -33,12 +33,10 @@ class MemberStore:
 
     def update(self, member):
         all_members = self.get_all()
-        i = 0
-        for m in all_members:
+        for i, m in enumerate(all_members):
             if member.id == m.id:
                 all_members[i] = member
                 break
-            i += 1
 
     def get_by_name(self, name):
         all_members = self.get_all()
@@ -56,7 +54,9 @@ class MemberStore:
             yield member
 
     def get_top_two(self, post_store):
-         return sorted(self.get_members_with_posts(post_store), key=lambda x: len(x.posts), reverse=True) [:2]
+          all_members = self.get_members_with_posts(post_store)
+          all_members = sorted(all_members, key=lambda x: len(x.posts), reverse=True)
+          return all_members[:2]
 
 
 class PostStore:
@@ -92,9 +92,7 @@ class PostStore:
 
     def update(self, post):
         all_posts = self.get_all()
-        i = 0
-        for p in all_posts:
+        for i, p in enumerate(all_posts):
             if post.id == p.id:
                 all_posts[i] = post
                 break
-            i += 1
