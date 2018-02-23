@@ -1,4 +1,5 @@
 import models, store
+from datetime import datetime
 
 def create_members():
     member1 = models.Member("Mohammed", 20)
@@ -24,15 +25,15 @@ def stores_should_be_similar():
         print("Same stores elements !")
 
 
-def print_members_list(members_list):
-    for member in members_list:
-        print(member)
+def print_instances_list(instances_list):
+    for instance in instances_list:
+        print(instance)
 
 
-def print_all_members(member_store):
+def print_all_instances(store):
     print("=" * 30)
 
-    print_members_list(member_store.get_all())
+    print_instances_list(store.get_all())
 
     print("=" * 30)
 
@@ -62,7 +63,7 @@ def store_should_get_members_by_name(member_store):
     print("*" * 30)
     print("Getting by name:")
     members_by_name_retrieved = member_store.get_by_name("Mohammed")
-    print_members_list(members_by_name_retrieved)
+    print_instances_list(members_by_name_retrieved)
 
 
 def catch_exception_when_deleting():
@@ -118,6 +119,14 @@ def store_should_get_top_two(member_store, post_store):
         for post in member_with_posts.posts:
             print("\t{}".format(post))
 
+def store_should_get_posts_by_date(post_store):
+
+    print("*" * 30)
+    print("Getting by date:")
+    posts_by_date_retrieved = post_store.get_posts_by_date()
+    print_instances_list(posts_by_date_retrieved)
+
+
 members_instances = create_members()
 member1, member2, member3 = members_instances
 
@@ -127,7 +136,7 @@ store_should_add_members(members_instances, member_store)
 
 stores_should_be_similar()
 
-print_all_members(member_store)
+print_all_instances(member_store)
 
 get_by_id_should_retrieve_same_object(member_store, member2)
 
@@ -135,7 +144,7 @@ update_should_modify_object(member_store, member3)
 
 catch_exception_when_deleting()
 
-print_all_members(member_store)
+print_all_instances(member_store)
 
 store_should_get_members_by_name(member_store)
 
@@ -148,8 +157,10 @@ post_store = store.PostStore()
 
 store_should_add_posts(posts_instances, post_store)
 
-print(post_store.get_all())
+print_all_instances(post_store)
 
 store_should_get_members_with_posts(member_store, post_store)
 
 store_should_get_top_two(member_store, post_store)
+
+store_should_get_posts_by_date(post_store)

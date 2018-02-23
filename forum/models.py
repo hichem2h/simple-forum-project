@@ -1,9 +1,12 @@
+from datetime import datetime
+
 class Post:
     def __init__ (self, title, content, member_id = 0):
         self.title = title
         self.content = content
         self.id = 0
         self.member_id = member_id
+        self.date = datetime.now()
 
     def __str__ (self):
         return 'member_id: {}, title :{},content: {}, id: {}'.format(self.member_id, self.title, self.content, self.id)
